@@ -1,0 +1,29 @@
+
+TrainParamEmbed2Cat:
+  use_device: "cuda" # cuda, cpu
+  start_learning_rate: 0.00001
+  name_model: "tmsa"
+  model_path_id: "tabularisai/multilingual-sentiment-analysis" # tabularisai/multilingual-sentiment-analysis
+  num_classes: 5
+  batch_size: 64
+  num_workers: 0 # bug then more 0
+  pin_memory: True # turn off with cpu
+  num_epochs: 30
+  name_optimizer: "AdamW" # SGD, Adam, AdamW
+  val_size: 0.2
+  test_size: 0.2
+  seed: 17
+
+
+InferParamEmbed2Cat:
+  name_model: "tmsa"
+  model_path_id: "tabularisai/multilingual-sentiment-analysis"
+  use_device: "cuda"
+  num_classes: 5
+  batch_size: 16
+  convert_to_numeric: True
+
+
+MetricsVisualizer:
+  part_sub: 0
+  task: "embed2cat"
