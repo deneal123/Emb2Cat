@@ -43,6 +43,7 @@ class GraduateEmbed2CatSubcat:
     val_size: float = 0.1
     test_size: float = 0.1
     seed: int = 17
+    unfreeze_layers: int = 3  # Новый параметр для размораживания слоев
 
     def __post_init__(self):
         self.date = datetime.now()
@@ -148,7 +149,7 @@ class GraduateEmbed2CatSubcat:
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_path_id)
         # Создаем базовую модель
         base_model = AutoModel.from_pretrained(self.model_path_id)    
-        self.model = TextClassificationModel(base_model, self.num_classes)
+        self.model = TextClassificationModel(base_model, self.num_classes, unfreeze_layers=self.unfreeze_layers)
         self.model.to(self.device)
 
     def get_classes_weights(self):

@@ -130,7 +130,7 @@ class VideoDataset(Dataset):
             separator: str = 'SEP',
     ):
 
-        self.metadata = metadata[:100]
+        self.metadata = metadata
         self.separator = separator
         self.set_name = set_name
         self.data_folder = data_folder

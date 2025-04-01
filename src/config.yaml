@@ -1,11 +1,10 @@
-
 TrainParamEmbed2Cat:
   use_device: "cuda" # cuda, cpu
   start_learning_rate: 0.00001
-  name_model: "tmsa"
-  model_path_id: "tabularisai/multilingual-sentiment-analysis" # tabularisai/multilingual-sentiment-analysis
+  name_model: "rtkrfc1"
+  model_path_id: "zloelias/rubert-tiny2-kinopoisk-reviews-finetuned-clf" # tabularisai/multilingual-sentiment-analysis # jhan21/distilbert-base-uncased-finetuned-amazon-food-reviews # dnzblgn/Customer-Reviews-Classification # zloelias/rubert-tiny2-kinopoisk-reviews-finetuned-clf # C0uchP0tat0/bert-reviews-online-courses-sentiment-analysis-sravni.ru-corp-ru
   num_classes: 5
-  batch_size: 64
+  batch_size: 128
   num_workers: 0 # bug then more 0
   pin_memory: True # turn off with cpu
   num_epochs: 30
@@ -16,14 +15,33 @@ TrainParamEmbed2Cat:
 
 
 InferParamEmbed2Cat:
-  name_model: "tmsa"
-  model_path_id: "tabularisai/multilingual-sentiment-analysis"
+  name_model: "rtkrfc1"
+  model_path_id: "zloelias/rubert-tiny2-kinopoisk-reviews-finetuned-clf"
   use_device: "cuda"
   num_classes: 5
-  batch_size: 16
+  batch_size: 64
   convert_to_numeric: True
 
 
 MetricsVisualizer:
   part_sub: 0
   task: "embed2cat"
+
+
+ClusterEmbed2Cat:
+  name_model: "rtkrfc1"
+  model_path_id: "zloelias/rubert-tiny2-kinopoisk-reviews-finetuned-clf"
+  use_device: "cuda"
+  num_classes: 5
+  batch_size: 64
+  n_components: 2  # Number of components for PCA
+
+
+KNNEmbed2Cat:
+  name_model: "rtkrfc1"
+  model_path_id: "zloelias/rubert-tiny2-kinopoisk-reviews-finetuned-clf"
+  use_device: "cuda"
+  num_classes: 5
+  batch_size: 64
+  n_neighbors: 3  # Number of neighbors for KNN
+  use_model_weights: True  # Whether to use pretrained weights from weights folder
